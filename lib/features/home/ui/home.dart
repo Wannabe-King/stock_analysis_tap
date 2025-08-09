@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:stock_analysis_tap/features/bonddetail/ui/bond_card.dart';
+import 'package:stock_analysis_tap/features/bonddetail/ui/bond.dart';
+import 'package:stock_analysis_tap/features/home/ui/widgets/bond_card.dart';
 import 'package:stock_analysis_tap/features/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,8 +14,12 @@ class Home extends StatelessWidget {
     final HomeBloc homeBloc=HomeBloc();
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
+      listenWhen: (previous, current) => current is HomeActionState,
+      buildWhen: (previous, current) => current is !HomeActionState,
       listener: (context, state) {
-        // TODO: implement listener
+        if(state is HomeNavigateToBondDetailActionState){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>BondDetailPage()));
+        }
       },
       builder: (context, state) {
         return SafeArea(
