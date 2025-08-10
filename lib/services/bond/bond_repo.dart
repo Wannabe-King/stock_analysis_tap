@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import '../../domain/bond/bond_model.dart';
-import '../../domain/bond/bond_repository.dart';
+import 'package:stock_analysis_tap/domain/bond/bond_model.dart';
+import 'package:stock_analysis_tap/domain/bond/bond_repository.dart';
 
 @LazySingleton(as: IBondRepository)
 class BondRepositoryImpl implements IBondRepository {
