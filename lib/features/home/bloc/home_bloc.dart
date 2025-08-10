@@ -17,6 +17,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> bondDetailNavigateClickEvent(BondDetailNavigateClickEvent event, Emitter<HomeState> emit) {
-    print("where are you");
+    emit(HomeNavigateToBondDetailActionState());
   }
 }
