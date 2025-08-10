@@ -21,7 +21,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> typeEvent(TypeEvent event, Emitter<HomeState> emit) {
-    print("hi from message");
     emit(const HomeState.loading());
     filterBonds(event.query,emit);
   }
@@ -50,8 +49,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(const HomeState.loading());
       try {
       final bonds = await repository.getBonds();
-        print("labubu");
-        print(bonds);
+      print(bonds);
         _allBonds = bonds;
         emit(HomeState.loaded(bonds, ''));
       } catch (e) {
