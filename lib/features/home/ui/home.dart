@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stock_analysis_tap/domain/bond/bond_model.dart';
 import 'package:stock_analysis_tap/features/bonddetail/ui/bond.dart';
 import 'package:stock_analysis_tap/features/home/ui/widgets/bond_card.dart';
 import 'package:stock_analysis_tap/features/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stock_analysis_tap/injection.dart';
+
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final HomeBloc homeBloc=HomeBloc();
+    final HomeBloc homeBloc=getIt<HomeBloc>();
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
       listener: (context, state) {
@@ -25,6 +28,15 @@ class Home extends StatelessWidget {
         );
       },
       builder: (context, state) {
+        Widget loading() => const Center(child: CircularProgressIndicator());
+        Widget loaded(List<BondModel> bondList, String query) { 
+          return Column(
+            children: bondList.map((bond)=>BondCard(bond:bond,highlightQuery: query)).toList(),
+          );
+        }
+        Widget error(String message) => Center(child: Text('Error: $message'));
+        Widget bondnavigate() => const SizedBox.shrink(); // Navigation handled in listener
+        Widget initial() => const SizedBox.shrink();
         return SafeArea(
           child: Scaffold(
             backgroundColor: const Color(0xFFF3F4F6),
@@ -70,8 +82,7 @@ class Home extends StatelessWidget {
                         SizedBox(width: 8),
                         Expanded(
                           child: TextField(
-                            onChanged: (value) => homeBloc.add(HomeEvent.type()),
-                            // onChanged: (query) => context.read<BondCubit>().filterBonds(query),
+                            onChanged: (value) => homeBloc.add(HomeEvent.type(query: value)),
                             style: GoogleFonts.inter(fontSize: 12, height: 1.5),
                             decoration: InputDecoration(
                               border: InputBorder.none,
@@ -90,12 +101,9 @@ class Home extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
 
-                  // Start from here
-                  GestureDetector(
-                    onTap: ()=>{
-                      homeBloc.add(HomeEvent.bondDetailNavigateClick())
-                    },
-                    child: BondCard()),
+                  
+                  state.when(initial: initial, loading: loading, loaded: loaded, error: ()=> error('message'), bondnavigate: bondnavigate)
+                  
                 ],
               ),
             ),

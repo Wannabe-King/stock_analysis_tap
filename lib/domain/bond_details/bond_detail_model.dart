@@ -4,7 +4,7 @@ part 'bond_detail_model.freezed.dart';
 part 'bond_detail_model.g.dart';
 
 @freezed
-class BondDetailModel with _$BondDetailModel {
+abstract class BondDetailModel with _$BondDetailModel {
   const factory BondDetailModel({
     required String logo,
     @JsonKey(name: 'company_name') required String companyName,
@@ -21,7 +21,7 @@ class BondDetailModel with _$BondDetailModel {
 }
 
 @freezed
-class ProsAndCons with _$ProsAndCons {
+abstract class ProsAndCons with _$ProsAndCons {
   const factory ProsAndCons({
     required List<String> pros,
     required List<String> cons,
@@ -32,7 +32,7 @@ class ProsAndCons with _$ProsAndCons {
 }
 
 @freezed
-class Financials with _$Financials {
+abstract class Financials with _$Financials {
   const factory Financials({
     required List<MonthValue> ebitda,
     required List<MonthValue> revenue,
@@ -43,7 +43,7 @@ class Financials with _$Financials {
 }
 
 @freezed
-class MonthValue with _$MonthValue {
+abstract class MonthValue with _$MonthValue {
   const factory MonthValue({
     required String month,
     required int value,
@@ -54,7 +54,7 @@ class MonthValue with _$MonthValue {
 }
 
 @freezed
-class IssuerDetails with _$IssuerDetails {
+abstract class IssuerDetails with _$IssuerDetails {
   const factory IssuerDetails({
     @JsonKey(name: 'issuer_name') required String issuerName,
     @JsonKey(name: 'type_of_issuer') required String typeOfIssuer,
