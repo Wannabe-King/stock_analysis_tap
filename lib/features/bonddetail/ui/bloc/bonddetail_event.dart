@@ -1,8 +1,5 @@
 part of 'bonddetail_bloc.dart';
 
-@immutable
-sealed class BonddetailEvent {}
-
 @freezed
 class BonddetailEvent with _$BonddetailEvent{
   const factory BonddetailEvent.analysis()= AnalysisTabEvent;
