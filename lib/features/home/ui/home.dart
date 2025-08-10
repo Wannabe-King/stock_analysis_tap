@@ -14,12 +14,15 @@ class Home extends StatelessWidget {
     final HomeBloc homeBloc=HomeBloc();
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
-      listenWhen: (previous, current) => current is HomeActionState,
-      buildWhen: (previous, current) => current is !HomeActionState,
       listener: (context, state) {
-        if(state is HomeNavigateToBondDetailActionState){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>BondDetailPage()));
-        }
+        state.whenOrNull(
+          bondnavigate: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => BondDetailPage()),
+            );
+          },
+        );
       },
       builder: (context, state) {
         return SafeArea(
@@ -67,7 +70,7 @@ class Home extends StatelessWidget {
                         SizedBox(width: 8),
                         Expanded(
                           child: TextField(
-                            onChanged: (value) => homeBloc.add(TypeEvent()),
+                            onChanged: (value) => homeBloc.add(HomeEvent.type()),
                             // onChanged: (query) => context.read<BondCubit>().filterBonds(query),
                             style: GoogleFonts.inter(fontSize: 12, height: 1.5),
                             decoration: InputDecoration(
@@ -90,7 +93,7 @@ class Home extends StatelessWidget {
                   // Start from here
                   GestureDetector(
                     onTap: ()=>{
-                      homeBloc.add(BondDetailNavigateClickEvent())
+                      homeBloc.add(HomeEvent.bondDetailNavigateClick())
                     },
                     child: BondCard()),
                 ],

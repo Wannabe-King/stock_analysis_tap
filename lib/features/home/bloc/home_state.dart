@@ -1,16 +1,11 @@
 part of 'home_bloc.dart';
 
-@immutable
-sealed class HomeState {}
+@freezed
+class HomeState with _$HomeState{
+  const factory HomeState.initial()= _HomeInitialState;
+  const factory HomeState.loading()= _HomeLoadingState;
+  const factory HomeState.loaded()= _HomeLoadedState;
+  const factory HomeState.error()= _HomeErrorState;
+  const factory HomeState.bondnavigate() = _HomeNavigateToBondDetailActionState;
 
-final class HomeInitial extends HomeState {}
-
-abstract class HomeActionState extends HomeState{}
-
-class HomeDataLoadingState extends HomeState{}
-
-class HomeDataLoadedSuccessState extends HomeState{}
-
-class HomeDataErrorState extends HomeState{}
-
-class HomeNavigateToBondDetailActionState extends HomeActionState{}
+}

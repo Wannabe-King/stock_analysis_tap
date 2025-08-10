@@ -1,8 +1,7 @@
 part of 'home_bloc.dart';
 
-@immutable
-sealed class HomeEvent {}
-
-class TypeEvent extends HomeEvent{}
-
-class BondDetailNavigateClickEvent extends HomeEvent{}
+@freezed
+class HomeEvent with _$HomeEvent{
+  const factory HomeEvent.type() = TypeEvent;
+  const factory HomeEvent.bondDetailNavigateClick()= BondDetailNavigateClickEvent;
+}
