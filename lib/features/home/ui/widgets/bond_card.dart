@@ -34,12 +34,11 @@ class BondCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child: Padding(
                 padding: const EdgeInsets.all(4), // adjust as needed
-                child: Icon(Icons.person),
-                // child: Image.network(
-                //   // bond.logo,
-                //   fit: BoxFit.contain,
-                //   errorBuilder: (_, __, ___) => const Icon(Icons.image, size: 20),
-                // ),
+                child: Image.network(
+                  bond.logo,
+                  fit: BoxFit.contain,
+                  errorBuilder: (_, __, ___) => const Icon(Icons.image, size: 20),
+                ),
               ),
             ),
           ),

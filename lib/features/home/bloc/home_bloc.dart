@@ -50,6 +50,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(const HomeState.loading());
       try {
       final bonds = await repository.getBonds();
+        print("labubu");
         print(bonds);
         _allBonds = bonds;
         emit(HomeState.loaded(bonds, ''));

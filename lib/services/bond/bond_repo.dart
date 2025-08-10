@@ -13,6 +13,14 @@ class BondRepositoryImpl implements IBondRepository {
   Future<List<BondModel>> getBonds() async {
     final response = await dio.get('https://eol122duf9sy4de.m.pipedream.net/');
     final List<dynamic> data = response.data['data'];
-    return data.map((e) => BondModel.fromJson(e)).toList();
+    print('Raw data: $data');
+
+    final bonds = data
+      .where((e) => e is Map<String, dynamic>) // filter only valid maps
+      .map((e) => BondModel.fromJson(e as Map<String, dynamic>))
+      .toList();
+
+    print('bonds: $bonds'); // this will now print
+    return bonds;
   }
 }

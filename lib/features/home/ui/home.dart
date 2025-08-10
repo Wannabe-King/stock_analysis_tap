@@ -68,55 +68,57 @@ class _HomeState extends State<Home> {
               centerTitle: false,
               systemOverlayStyle: SystemUiOverlayStyle.dark,
             ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 16),
-                  Container(
-                    height: 42,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 3),
-                          child: Icon(
-                            Icons.search,
-                            size: 16,
-                            color: Color(0xFF6A7282),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 16),
+                    Container(
+                      height: 42,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 3),
+                            child: Icon(
+                              Icons.search,
+                              size: 16,
+                              color: Color(0xFF6A7282),
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 8),
-                        Expanded(
-                          child: TextField(
-                            onChanged: (value) => homeBloc.add(HomeEvent.type(query: value)),
-                            style: GoogleFonts.inter(fontSize: 12, height: 1.5),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Search by Issuer Name or ISIN',
-                              hintStyle: GoogleFonts.inter(
-                                fontSize: 12,
-                                height: 1.5,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xFF99A1AF),
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: TextField(
+                              onChanged: (value) => homeBloc.add(HomeEvent.type(query: value)),
+                              style: GoogleFonts.inter(fontSize: 12, height: 1.5),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'Search by Issuer Name or ISIN',
+                                hintStyle: GoogleFonts.inter(
+                                  fontSize: 12,
+                                  height: 1.5,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xFF99A1AF),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-
-                  
-                  state.when(initial: initial, loading: loading, loaded: loaded, error: error, bondnavigate: bondnavigate)
-                  
-                ],
+                    const SizedBox(height: 24),
+              
+                    
+                    state.when(initial: initial, loading: loading, loaded: loaded, error: error, bondnavigate: bondnavigate)
+                    
+                  ],
+                ),
               ),
             ),
           ),

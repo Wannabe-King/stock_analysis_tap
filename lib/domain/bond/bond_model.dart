@@ -9,10 +9,10 @@ abstract class BondModel with _$BondModel {
     required String logo,
     required String isin,
     required String rating,
-    @JsonKey(name: 'issuer_name') required String issuerName,
+    @JsonKey(name: 'company_name') required String issuerName,
     required List<String> tags,
   }) = _BondModel;
 
-  factory BondModel.fromJson(Map<String, dynamic> jsonData) =>
-      _$BondModelFromJson(jsonData);
+  factory BondModel.fromJson(Map<String, dynamic> json) =>
+      _$BondModelFromJson(json);
 }

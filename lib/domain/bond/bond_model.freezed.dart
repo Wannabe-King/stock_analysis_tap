@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BondModel {
 
- String get logo; String get isin; String get rating;@JsonKey(name: 'issuer_name') String get issuerName; List<String> get tags;
+ String get logo; String get isin; String get rating;@JsonKey(name: 'company_name') String get issuerName; List<String> get tags;
 /// Create a copy of BondModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $BondModelCopyWith<$Res>  {
   factory $BondModelCopyWith(BondModel value, $Res Function(BondModel) _then) = _$BondModelCopyWithImpl;
 @useResult
 $Res call({
- String logo, String isin, String rating,@JsonKey(name: 'issuer_name') String issuerName, List<String> tags
+ String logo, String isin, String rating,@JsonKey(name: 'company_name') String issuerName, List<String> tags
 });
 
 
@@ -157,7 +157,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String logo,  String isin,  String rating, @JsonKey(name: 'issuer_name')  String issuerName,  List<String> tags)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String logo,  String isin,  String rating, @JsonKey(name: 'company_name')  String issuerName,  List<String> tags)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BondModel() when $default != null:
 return $default(_that.logo,_that.isin,_that.rating,_that.issuerName,_that.tags);case _:
@@ -178,7 +178,7 @@ return $default(_that.logo,_that.isin,_that.rating,_that.issuerName,_that.tags);
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String logo,  String isin,  String rating, @JsonKey(name: 'issuer_name')  String issuerName,  List<String> tags)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String logo,  String isin,  String rating, @JsonKey(name: 'company_name')  String issuerName,  List<String> tags)  $default,) {final _that = this;
 switch (_that) {
 case _BondModel():
 return $default(_that.logo,_that.isin,_that.rating,_that.issuerName,_that.tags);case _:
@@ -198,7 +198,7 @@ return $default(_that.logo,_that.isin,_that.rating,_that.issuerName,_that.tags);
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String logo,  String isin,  String rating, @JsonKey(name: 'issuer_name')  String issuerName,  List<String> tags)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String logo,  String isin,  String rating, @JsonKey(name: 'company_name')  String issuerName,  List<String> tags)?  $default,) {final _that = this;
 switch (_that) {
 case _BondModel() when $default != null:
 return $default(_that.logo,_that.isin,_that.rating,_that.issuerName,_that.tags);case _:
@@ -213,13 +213,13 @@ return $default(_that.logo,_that.isin,_that.rating,_that.issuerName,_that.tags);
 @JsonSerializable()
 
 class _BondModel implements BondModel {
-  const _BondModel({required this.logo, required this.isin, required this.rating, @JsonKey(name: 'issuer_name') required this.issuerName, required final  List<String> tags}): _tags = tags;
+  const _BondModel({required this.logo, required this.isin, required this.rating, @JsonKey(name: 'company_name') required this.issuerName, required final  List<String> tags}): _tags = tags;
   factory _BondModel.fromJson(Map<String, dynamic> json) => _$BondModelFromJson(json);
 
 @override final  String logo;
 @override final  String isin;
 @override final  String rating;
-@override@JsonKey(name: 'issuer_name') final  String issuerName;
+@override@JsonKey(name: 'company_name') final  String issuerName;
  final  List<String> _tags;
 @override List<String> get tags {
   if (_tags is EqualUnmodifiableListView) return _tags;
@@ -261,7 +261,7 @@ abstract mixin class _$BondModelCopyWith<$Res> implements $BondModelCopyWith<$Re
   factory _$BondModelCopyWith(_BondModel value, $Res Function(_BondModel) _then) = __$BondModelCopyWithImpl;
 @override @useResult
 $Res call({
- String logo, String isin, String rating,@JsonKey(name: 'issuer_name') String issuerName, List<String> tags
+ String logo, String isin, String rating,@JsonKey(name: 'company_name') String issuerName, List<String> tags
 });
 
 
