@@ -55,10 +55,11 @@ extension HomeEventPatterns on HomeEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( TypeEvent value)?  type,TResult Function( BondDetailNavigateClickEvent value)?  bondDetailNavigateClick,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( InitialEvent value)?  initial,TResult Function( TypeEvent value)?  type,TResult Function( BondDetailNavigateClickEvent value)?  bondDetailNavigateClick,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case TypeEvent() when type != null:
+case InitialEvent() when initial != null:
+return initial(_that);case TypeEvent() when type != null:
 return type(_that);case BondDetailNavigateClickEvent() when bondDetailNavigateClick != null:
 return bondDetailNavigateClick(_that);case _:
   return orElse();
@@ -78,10 +79,11 @@ return bondDetailNavigateClick(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( TypeEvent value)  type,required TResult Function( BondDetailNavigateClickEvent value)  bondDetailNavigateClick,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( InitialEvent value)  initial,required TResult Function( TypeEvent value)  type,required TResult Function( BondDetailNavigateClickEvent value)  bondDetailNavigateClick,}){
 final _that = this;
 switch (_that) {
-case TypeEvent():
+case InitialEvent():
+return initial(_that);case TypeEvent():
 return type(_that);case BondDetailNavigateClickEvent():
 return bondDetailNavigateClick(_that);case _:
   throw StateError('Unexpected subclass');
@@ -100,10 +102,11 @@ return bondDetailNavigateClick(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( TypeEvent value)?  type,TResult? Function( BondDetailNavigateClickEvent value)?  bondDetailNavigateClick,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( InitialEvent value)?  initial,TResult? Function( TypeEvent value)?  type,TResult? Function( BondDetailNavigateClickEvent value)?  bondDetailNavigateClick,}){
 final _that = this;
 switch (_that) {
-case TypeEvent() when type != null:
+case InitialEvent() when initial != null:
+return initial(_that);case TypeEvent() when type != null:
 return type(_that);case BondDetailNavigateClickEvent() when bondDetailNavigateClick != null:
 return bondDetailNavigateClick(_that);case _:
   return null;
@@ -122,9 +125,10 @@ return bondDetailNavigateClick(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String query)?  type,TResult Function()?  bondDetailNavigateClick,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( String query)?  type,TResult Function()?  bondDetailNavigateClick,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case TypeEvent() when type != null:
+case InitialEvent() when initial != null:
+return initial();case TypeEvent() when type != null:
 return type(_that.query);case BondDetailNavigateClickEvent() when bondDetailNavigateClick != null:
 return bondDetailNavigateClick();case _:
   return orElse();
@@ -144,9 +148,10 @@ return bondDetailNavigateClick();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String query)  type,required TResult Function()  bondDetailNavigateClick,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( String query)  type,required TResult Function()  bondDetailNavigateClick,}) {final _that = this;
 switch (_that) {
-case TypeEvent():
+case InitialEvent():
+return initial();case TypeEvent():
 return type(_that.query);case BondDetailNavigateClickEvent():
 return bondDetailNavigateClick();case _:
   throw StateError('Unexpected subclass');
@@ -165,9 +170,10 @@ return bondDetailNavigateClick();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String query)?  type,TResult? Function()?  bondDetailNavigateClick,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( String query)?  type,TResult? Function()?  bondDetailNavigateClick,}) {final _that = this;
 switch (_that) {
-case TypeEvent() when type != null:
+case InitialEvent() when initial != null:
+return initial();case TypeEvent() when type != null:
 return type(_that.query);case BondDetailNavigateClickEvent() when bondDetailNavigateClick != null:
 return bondDetailNavigateClick();case _:
   return null;
@@ -176,6 +182,38 @@ return bondDetailNavigateClick();case _:
 }
 
 }
+
+/// @nodoc
+
+
+class InitialEvent implements HomeEvent {
+  const InitialEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InitialEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeEvent.initial()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 
@@ -395,13 +433,13 @@ return bondnavigate(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<BondModel> bonds,  String highlightQuery)?  loaded,TResult Function()?  error,TResult Function()?  bondnavigate,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<BondModel> bonds,  String highlightQuery)?  loaded,TResult Function( String error)?  error,TResult Function()?  bondnavigate,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeInitialState() when initial != null:
 return initial();case _HomeLoadingState() when loading != null:
 return loading();case _HomeLoadedState() when loaded != null:
 return loaded(_that.bonds,_that.highlightQuery);case _HomeErrorState() when error != null:
-return error();case _HomeNavigateToBondDetailActionState() when bondnavigate != null:
+return error(_that.error);case _HomeNavigateToBondDetailActionState() when bondnavigate != null:
 return bondnavigate();case _:
   return orElse();
 
@@ -420,13 +458,13 @@ return bondnavigate();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<BondModel> bonds,  String highlightQuery)  loaded,required TResult Function()  error,required TResult Function()  bondnavigate,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<BondModel> bonds,  String highlightQuery)  loaded,required TResult Function( String error)  error,required TResult Function()  bondnavigate,}) {final _that = this;
 switch (_that) {
 case _HomeInitialState():
 return initial();case _HomeLoadingState():
 return loading();case _HomeLoadedState():
 return loaded(_that.bonds,_that.highlightQuery);case _HomeErrorState():
-return error();case _HomeNavigateToBondDetailActionState():
+return error(_that.error);case _HomeNavigateToBondDetailActionState():
 return bondnavigate();case _:
   throw StateError('Unexpected subclass');
 
@@ -444,13 +482,13 @@ return bondnavigate();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<BondModel> bonds,  String highlightQuery)?  loaded,TResult? Function()?  error,TResult? Function()?  bondnavigate,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<BondModel> bonds,  String highlightQuery)?  loaded,TResult? Function( String error)?  error,TResult? Function()?  bondnavigate,}) {final _that = this;
 switch (_that) {
 case _HomeInitialState() when initial != null:
 return initial();case _HomeLoadingState() when loading != null:
 return loading();case _HomeLoadedState() when loaded != null:
 return loaded(_that.bonds,_that.highlightQuery);case _HomeErrorState() when error != null:
-return error();case _HomeNavigateToBondDetailActionState() when bondnavigate != null:
+return error(_that.error);case _HomeNavigateToBondDetailActionState() when bondnavigate != null:
 return bondnavigate();case _:
   return null;
 
@@ -601,33 +639,67 @@ as String,
 
 
 class _HomeErrorState implements HomeState {
-  const _HomeErrorState();
+  const _HomeErrorState(this.error);
   
 
+ final  String error;
 
-
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$HomeErrorStateCopyWith<_HomeErrorState> get copyWith => __$HomeErrorStateCopyWithImpl<_HomeErrorState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeErrorState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeErrorState&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,error);
 
 @override
 String toString() {
-  return 'HomeState.error()';
+  return 'HomeState.error(error: $error)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$HomeErrorStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory _$HomeErrorStateCopyWith(_HomeErrorState value, $Res Function(_HomeErrorState) _then) = __$HomeErrorStateCopyWithImpl;
+@useResult
+$Res call({
+ String error
+});
 
 
+
+
+}
+/// @nodoc
+class __$HomeErrorStateCopyWithImpl<$Res>
+    implements _$HomeErrorStateCopyWith<$Res> {
+  __$HomeErrorStateCopyWithImpl(this._self, this._then);
+
+  final _HomeErrorState _self;
+  final $Res Function(_HomeErrorState) _then;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? error = null,}) {
+  return _then(_HomeErrorState(
+null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

@@ -9,12 +9,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_analysis_tap/injection.dart';
 
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    homeBloc.add(InitialEvent());
+    super.initState();
+  }
+
+  final HomeBloc homeBloc=getIt<HomeBloc>();
+  
+  @override
   Widget build(BuildContext context) {
-    final HomeBloc homeBloc=getIt<HomeBloc>();
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
       listener: (context, state) {
@@ -35,7 +47,7 @@ class Home extends StatelessWidget {
           );
         }
         Widget error(String message) => Center(child: Text('Error: $message'));
-        Widget bondnavigate() => const SizedBox.shrink(); // Navigation handled in listener
+        Widget bondnavigate() => const SizedBox.shrink();
         Widget initial() => const SizedBox.shrink();
         return SafeArea(
           child: Scaffold(
@@ -102,7 +114,7 @@ class Home extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   
-                  state.when(initial: initial, loading: loading, loaded: loaded, error: ()=> error('message'), bondnavigate: bondnavigate)
+                  state.when(initial: initial, loading: loading, loaded: loaded, error: error, bondnavigate: bondnavigate)
                   
                 ],
               ),
