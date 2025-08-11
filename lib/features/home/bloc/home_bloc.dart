@@ -25,8 +25,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     filterBonds(event.query,emit);
   }
 
-  FutureOr<void> bondDetailNavigateClickEvent(BondDetailNavigateClickEvent event, Emitter<HomeState> emit) {
-    emit(const HomeState.bondnavigate());
+  Future<void> bondDetailNavigateClickEvent(BondDetailNavigateClickEvent event, Emitter<HomeState> emit) async {
+    emit(HomeState.bondnavigate(event.isin));
   }
 
   void filterBonds(String query,Emitter<HomeState> emit) {
