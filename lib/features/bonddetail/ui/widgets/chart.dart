@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stock_analysis_tap/domain/bond_details/bond_detail_model.dart';
 import 'package:stock_analysis_tap/features/bonddetail/ui/widgets/issuer.dart';
+import 'package:vibration/vibration.dart';
 
 class FinancialChart extends StatefulWidget {
   final Financials financials;
@@ -82,10 +83,16 @@ class _FinancialChartState extends State<FinancialChart> {
                     ),
                     child: Row(
                       children: [
-                        _toggleTab('EBITDA', showEbitda, () {
+                        _toggleTab('EBITDA', showEbitda, () async {
+                          if (await Vibration.hasVibrator()) {
+                            Vibration.vibrate();
+                          }
                           setState(() => showEbitda = true);
                         }),
-                        _toggleTab('Revenue', !showEbitda, () {
+                        _toggleTab('Revenue', !showEbitda, () async {
+                          if (await Vibration.hasVibrator()) {
+                            Vibration.vibrate();
+                          }
                           setState(() => showEbitda = false);
                         }),
                       ],
