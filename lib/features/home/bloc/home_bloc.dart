@@ -21,13 +21,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> typeEvent(TypeEvent event, Emitter<HomeState> emit) {
-    print("hi from message");
     emit(const HomeState.loading());
     filterBonds(event.query,emit);
   }
 
-  FutureOr<void> bondDetailNavigateClickEvent(BondDetailNavigateClickEvent event, Emitter<HomeState> emit) {
-    emit(const HomeState.bondnavigate());
+  Future<void> bondDetailNavigateClickEvent(BondDetailNavigateClickEvent event, Emitter<HomeState> emit) async {
+    emit(HomeState.bondnavigate(event.isin));
   }
 
   void filterBonds(String query,Emitter<HomeState> emit) {
@@ -50,8 +49,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(const HomeState.loading());
       try {
       final bonds = await repository.getBonds();
-        print("labubu");
-        print(bonds);
+      print(bonds);
         _allBonds = bonds;
         emit(HomeState.loaded(bonds, ''));
       } catch (e) {

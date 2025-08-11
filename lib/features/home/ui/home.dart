@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stock_analysis_tap/domain/bond/bond_model.dart';
-import 'package:stock_analysis_tap/features/bonddetail/ui/bond.dart';
+import 'package:stock_analysis_tap/features/bonddetail/ui/bond_detail_page.dart';
 import 'package:stock_analysis_tap/features/home/ui/widgets/bond_card.dart';
 import 'package:stock_analysis_tap/features/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,10 +31,10 @@ class _HomeState extends State<Home> {
       bloc: homeBloc,
       listener: (context, state) {
         state.whenOrNull(
-          bondnavigate: () {
+          bondnavigate: (isin) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => BondDetailPage()),
+              MaterialPageRoute(builder: (context) => BondDetailPage(isin: isin,)),
             );
           },
         );
@@ -43,32 +43,34 @@ class _HomeState extends State<Home> {
         Widget loading() => const Center(child: CircularProgressIndicator());
         Widget loaded(List<BondModel> bondList, String query) { 
           return Column(
-            children: bondList.map((bond)=>BondCard(bond:bond,highlightQuery: query)).toList(),
+            children: bondList.map((bond)=>GestureDetector(onTap: ()=>{
+              homeBloc.add(BondDetailNavigateClickEvent(isin: bond.isin))
+            },child: BondCard(bond:bond,highlightQuery: query))).toList(),
           );
         }
         Widget error(String message) => Center(child: Text('Error: $message'));
-        Widget bondnavigate() => const SizedBox.shrink();
+        Widget bondnavigate([_]) => const SizedBox.shrink();
         Widget initial() => const SizedBox.shrink();
-        return SafeArea(
-          child: Scaffold(
-            backgroundColor: const Color(0xFFF3F4F6),
-            appBar: AppBar(
-              title: Text(
-                'Home',
-                style: GoogleFonts.inter(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w600,
-                  height: 1.5, // 150%
-                  letterSpacing: -0.78, // -3%
-                  color: Colors.black,
-                ),
+        return Scaffold(
+          backgroundColor: const Color(0xFFF3F4F6),
+          appBar: AppBar(
+            title: Text(
+              'Home',
+              style: GoogleFonts.inter(
+                fontSize: 26,
+                fontWeight: FontWeight.w600,
+                height: 1.5, // 150%
+                letterSpacing: -0.78, // -3%
+                color: Colors.black,
               ),
-              backgroundColor: const Color(0xFFF3F4F6),
-              elevation: 0,
-              centerTitle: false,
-              systemOverlayStyle: SystemUiOverlayStyle.dark,
             ),
-            body: SingleChildScrollView(
+            backgroundColor: const Color(0xFFF3F4F6),
+            elevation: 0,
+            centerTitle: false,
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+          ),
+          body: SafeArea(
+            child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(

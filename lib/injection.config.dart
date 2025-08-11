@@ -16,6 +16,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'core/di/register_module.dart' as _i854;
 import 'domain/bond/bond_repository.dart' as _i414;
 import 'domain/bond_details/bond_detail_repository.dart' as _i439;
+import 'features/bonddetail/bloc/bonddetail_bloc.dart' as _i346;
 import 'features/home/bloc/home_bloc.dart' as _i186;
 import 'services/bond/bond_repo.dart' as _i932;
 import 'services/bond_details.dart/bond_details_repo.dart' as _i237;
@@ -37,6 +38,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i186.HomeBloc>(
       () => _i186.HomeBloc(gh<_i414.IBondRepository>()),
+    );
+    gh.factory<_i346.BonddetailBloc>(
+      () => _i346.BonddetailBloc(gh<_i439.IBondDetailRepository>()),
     );
     return this;
   }

@@ -125,12 +125,12 @@ return bondDetailNavigateClick(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( String query)?  type,TResult Function()?  bondDetailNavigateClick,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( String query)?  type,TResult Function( String isin)?  bondDetailNavigateClick,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case InitialEvent() when initial != null:
 return initial();case TypeEvent() when type != null:
 return type(_that.query);case BondDetailNavigateClickEvent() when bondDetailNavigateClick != null:
-return bondDetailNavigateClick();case _:
+return bondDetailNavigateClick(_that.isin);case _:
   return orElse();
 
 }
@@ -148,12 +148,12 @@ return bondDetailNavigateClick();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( String query)  type,required TResult Function()  bondDetailNavigateClick,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( String query)  type,required TResult Function( String isin)  bondDetailNavigateClick,}) {final _that = this;
 switch (_that) {
 case InitialEvent():
 return initial();case TypeEvent():
 return type(_that.query);case BondDetailNavigateClickEvent():
-return bondDetailNavigateClick();case _:
+return bondDetailNavigateClick(_that.isin);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,12 +170,12 @@ return bondDetailNavigateClick();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( String query)?  type,TResult? Function()?  bondDetailNavigateClick,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( String query)?  type,TResult? Function( String isin)?  bondDetailNavigateClick,}) {final _that = this;
 switch (_that) {
 case InitialEvent() when initial != null:
 return initial();case TypeEvent() when type != null:
 return type(_that.query);case BondDetailNavigateClickEvent() when bondDetailNavigateClick != null:
-return bondDetailNavigateClick();case _:
+return bondDetailNavigateClick(_that.isin);case _:
   return null;
 
 }
@@ -285,33 +285,67 @@ as String,
 
 
 class BondDetailNavigateClickEvent implements HomeEvent {
-  const BondDetailNavigateClickEvent();
+  const BondDetailNavigateClickEvent({required this.isin});
   
 
+ final  String isin;
 
-
+/// Create a copy of HomeEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BondDetailNavigateClickEventCopyWith<BondDetailNavigateClickEvent> get copyWith => _$BondDetailNavigateClickEventCopyWithImpl<BondDetailNavigateClickEvent>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BondDetailNavigateClickEvent);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BondDetailNavigateClickEvent&&(identical(other.isin, isin) || other.isin == isin));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,isin);
 
 @override
 String toString() {
-  return 'HomeEvent.bondDetailNavigateClick()';
+  return 'HomeEvent.bondDetailNavigateClick(isin: $isin)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $BondDetailNavigateClickEventCopyWith<$Res> implements $HomeEventCopyWith<$Res> {
+  factory $BondDetailNavigateClickEventCopyWith(BondDetailNavigateClickEvent value, $Res Function(BondDetailNavigateClickEvent) _then) = _$BondDetailNavigateClickEventCopyWithImpl;
+@useResult
+$Res call({
+ String isin
+});
 
 
+
+
+}
+/// @nodoc
+class _$BondDetailNavigateClickEventCopyWithImpl<$Res>
+    implements $BondDetailNavigateClickEventCopyWith<$Res> {
+  _$BondDetailNavigateClickEventCopyWithImpl(this._self, this._then);
+
+  final BondDetailNavigateClickEvent _self;
+  final $Res Function(BondDetailNavigateClickEvent) _then;
+
+/// Create a copy of HomeEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? isin = null,}) {
+  return _then(BondDetailNavigateClickEvent(
+isin: null == isin ? _self.isin : isin // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 /// @nodoc
 mixin _$HomeState {
@@ -433,14 +467,14 @@ return bondnavigate(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<BondModel> bonds,  String highlightQuery)?  loaded,TResult Function( String error)?  error,TResult Function()?  bondnavigate,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<BondModel> bonds,  String highlightQuery)?  loaded,TResult Function( String error)?  error,TResult Function( String isin)?  bondnavigate,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeInitialState() when initial != null:
 return initial();case _HomeLoadingState() when loading != null:
 return loading();case _HomeLoadedState() when loaded != null:
 return loaded(_that.bonds,_that.highlightQuery);case _HomeErrorState() when error != null:
 return error(_that.error);case _HomeNavigateToBondDetailActionState() when bondnavigate != null:
-return bondnavigate();case _:
+return bondnavigate(_that.isin);case _:
   return orElse();
 
 }
@@ -458,14 +492,14 @@ return bondnavigate();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<BondModel> bonds,  String highlightQuery)  loaded,required TResult Function( String error)  error,required TResult Function()  bondnavigate,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<BondModel> bonds,  String highlightQuery)  loaded,required TResult Function( String error)  error,required TResult Function( String isin)  bondnavigate,}) {final _that = this;
 switch (_that) {
 case _HomeInitialState():
 return initial();case _HomeLoadingState():
 return loading();case _HomeLoadedState():
 return loaded(_that.bonds,_that.highlightQuery);case _HomeErrorState():
 return error(_that.error);case _HomeNavigateToBondDetailActionState():
-return bondnavigate();case _:
+return bondnavigate(_that.isin);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -482,14 +516,14 @@ return bondnavigate();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<BondModel> bonds,  String highlightQuery)?  loaded,TResult? Function( String error)?  error,TResult? Function()?  bondnavigate,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<BondModel> bonds,  String highlightQuery)?  loaded,TResult? Function( String error)?  error,TResult? Function( String isin)?  bondnavigate,}) {final _that = this;
 switch (_that) {
 case _HomeInitialState() when initial != null:
 return initial();case _HomeLoadingState() when loading != null:
 return loading();case _HomeLoadedState() when loaded != null:
 return loaded(_that.bonds,_that.highlightQuery);case _HomeErrorState() when error != null:
 return error(_that.error);case _HomeNavigateToBondDetailActionState() when bondnavigate != null:
-return bondnavigate();case _:
+return bondnavigate(_that.isin);case _:
   return null;
 
 }
@@ -705,32 +739,66 @@ as String,
 
 
 class _HomeNavigateToBondDetailActionState implements HomeState {
-  const _HomeNavigateToBondDetailActionState();
+  const _HomeNavigateToBondDetailActionState(this.isin);
   
 
+ final  String isin;
 
-
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$HomeNavigateToBondDetailActionStateCopyWith<_HomeNavigateToBondDetailActionState> get copyWith => __$HomeNavigateToBondDetailActionStateCopyWithImpl<_HomeNavigateToBondDetailActionState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeNavigateToBondDetailActionState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeNavigateToBondDetailActionState&&(identical(other.isin, isin) || other.isin == isin));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,isin);
 
 @override
 String toString() {
-  return 'HomeState.bondnavigate()';
+  return 'HomeState.bondnavigate(isin: $isin)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$HomeNavigateToBondDetailActionStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
+  factory _$HomeNavigateToBondDetailActionStateCopyWith(_HomeNavigateToBondDetailActionState value, $Res Function(_HomeNavigateToBondDetailActionState) _then) = __$HomeNavigateToBondDetailActionStateCopyWithImpl;
+@useResult
+$Res call({
+ String isin
+});
 
 
+
+
+}
+/// @nodoc
+class __$HomeNavigateToBondDetailActionStateCopyWithImpl<$Res>
+    implements _$HomeNavigateToBondDetailActionStateCopyWith<$Res> {
+  __$HomeNavigateToBondDetailActionStateCopyWithImpl(this._self, this._then);
+
+  final _HomeNavigateToBondDetailActionState _self;
+  final $Res Function(_HomeNavigateToBondDetailActionState) _then;
+
+/// Create a copy of HomeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? isin = null,}) {
+  return _then(_HomeNavigateToBondDetailActionState(
+null == isin ? _self.isin : isin // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 // dart format on
