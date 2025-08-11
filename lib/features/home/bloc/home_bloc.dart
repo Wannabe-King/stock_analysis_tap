@@ -14,6 +14,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final IBondRepository repository;
   late List<BondModel> _allBonds;
 
+  @visibleForTesting
+  set allBonds(List<BondModel> bonds) => _allBonds = bonds;
+
   HomeBloc(this.repository) : super(const HomeState.initial()) {
     on<InitialEvent>(initialEvent);
     on<TypeEvent>(typeEvent);

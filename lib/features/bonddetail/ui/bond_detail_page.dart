@@ -56,21 +56,3 @@ class _BondDetailPageState extends State<BondDetailPage> {
   }
 
 }
-
-Widget _tag(String text, Color bgColor, Color textColor) {
-  return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-    decoration: BoxDecoration(
-      color: bgColor,
-      borderRadius: BorderRadius.circular(6),
-    ),
-    child: Text(
-      text,
-      style: GoogleFonts.inter(
-        fontSize: 10,
-        fontWeight: FontWeight.w500,
-        color: textColor,
-      ),
-    ),
-  );
-}
