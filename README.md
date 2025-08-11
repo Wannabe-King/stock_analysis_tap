@@ -14,8 +14,21 @@ Stock Analysis Tap is a mobile app built with Flutter to help users visualize an
 - Modern UI with Google Fonts
 
 ## Video Demo
+[tap_submission.webm](https://github.com/user-attachments/assets/7ad75c4d-c326-4893-a3ad-5a5f2f11deaf)
 
-A video demo of the app is available as [`tap_submission.webm`](tap_submission.webm).
+## Screenshots
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/2b29feaa-827a-4dfb-9640-f4acb24dcbc9" width="300" /></td>
+    <td><img src="https://github.com/user-attachments/assets/6d7efe9b-ed64-4dcb-8746-eee79704359f" width="300" /></td>
+    <td><img src="https://github.com/user-attachments/assets/180a61c1-9c4b-4415-b88e-8983a426595a" width="300" /></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/408e1367-40e5-477d-aead-5f9b13891ffb" width="300" /></td>
+    <td><img src="https://github.com/user-attachments/assets/486a9603-8710-467a-9086-eb1a57c3b7e3" width="300" /></td>
+    <td></td>
+  </tr>
+</table>
 
 ## Getting Started
 
