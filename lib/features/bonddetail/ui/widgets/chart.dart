@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stock_analysis_tap/domain/bond_details/bond_detail_model.dart';
+import 'package:stock_analysis_tap/features/bonddetail/ui/widgets/issuer.dart';
 
 class FinancialChart extends StatefulWidget {
   final Financials financials;
