@@ -21,11 +21,7 @@ class IssuerDetailsCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(
-                'assets/person.png',
-                width: 18,
-                height: 18,
-              ),
+              Icon(Icons.contact_page),
               const SizedBox(width: 8),
               Text(
                 'Issuer Details',

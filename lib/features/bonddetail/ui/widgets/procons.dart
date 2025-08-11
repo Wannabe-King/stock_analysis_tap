@@ -58,7 +58,7 @@ class ProsConsSection extends StatelessWidget {
 
   Widget _buildItem(String text, bool isPro) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.only(bottom: 20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -72,6 +72,7 @@ class ProsConsSection extends StatelessWidget {
             child: Text(
               text,
               style: GoogleFonts.inter(
+                fontWeight: FontWeight.w500,
                 fontSize: 12,
                 color: isPro ? const Color(0xFF364153) : const Color(0xFF64748B),
               ),

@@ -57,7 +57,7 @@ class _BondTabsState extends State<BondTabs> with SingleTickerProviderStateMixin
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 850, // adjust as per your layout needs
+          height: 860,
           child: TabBarView(
             controller: _tabController,
             children: [
