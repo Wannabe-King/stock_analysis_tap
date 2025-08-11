@@ -37,6 +37,7 @@ class _BondTabsState extends State<BondTabs> with SingleTickerProviderStateMixin
         Container(
           color: const Color(0xFFF9FAFB),
           child: TabBar(
+            enableFeedback: true,
             tabAlignment: TabAlignment.start,
             controller: _tabController,
             isScrollable: true,

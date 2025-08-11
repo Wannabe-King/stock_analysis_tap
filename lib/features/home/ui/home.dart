@@ -7,6 +7,7 @@ import 'package:stock_analysis_tap/features/home/ui/widgets/bond_card.dart';
 import 'package:stock_analysis_tap/features/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_analysis_tap/injection.dart';
+import 'package:vibration/vibration.dart';
 
 
 class Home extends StatefulWidget {
@@ -29,6 +30,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
+      listenWhen: (previous, current) => current.whenOrNull(bondnavigate: (isin) => true) == true,
+      buildWhen: (previous, current) => current.whenOrNull(bondnavigate: (isin) => true) != true,
       listener: (context, state) {
         state.whenOrNull(
           bondnavigate: (isin) {
@@ -42,10 +45,30 @@ class _HomeState extends State<Home> {
       builder: (context, state) {
         Widget loading() => const Center(child: CircularProgressIndicator());
         Widget loaded(List<BondModel> bondList, String query) { 
-          return Column(
-            children: bondList.map((bond)=>GestureDetector(onTap: ()=>{
-              homeBloc.add(BondDetailNavigateClickEvent(isin: bond.isin))
-            },child: BondCard(bond:bond,highlightQuery: query))).toList(),
+          return Container(
+            decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            ),
+            child: ListView.separated(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: bondList.length,
+      itemBuilder: (context, index) => GestureDetector(
+        onTap: () async {
+           if (await Vibration.hasVibrator()) {
+            Vibration.vibrate(duration: 30);
+            }
+          homeBloc.add(BondDetailNavigateClickEvent(isin: bondList[index].isin));
+        },
+        child: BondCard(bond: bondList[index], highlightQuery: query),
+      ),
+      separatorBuilder: (context, index) => const Divider(
+        height: 1,
+        thickness: 1,
+        color: Color(0xFFE5E7EB),
+      ),
+    ),
           );
         }
         Widget error(String message) => Center(child: Text('Error: $message'));

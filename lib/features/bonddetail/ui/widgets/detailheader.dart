@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stock_analysis_tap/domain/bond_details/bond_detail_model.dart';
+import 'package:vibration/vibration.dart';
 
 class BondHeader extends StatelessWidget {
   final BondDetailModel bond;
@@ -66,7 +67,12 @@ class BondHeader extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(25),
-        onTap: () => Navigator.of(context).pop(),
+        onTap: () async => {
+          if (await Vibration.hasVibrator()) {
+            Vibration.vibrate()
+          },
+          Navigator.of(context).pop()
+          },
         child: Center(
           child: Icon(Icons.arrow_back)
         ),
